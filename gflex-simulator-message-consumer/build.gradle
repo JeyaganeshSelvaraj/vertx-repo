@@ -1,0 +1,21 @@
+mainClassName = 'io.vertx.core.Launcher'
+
+def mainVerticleName = 'com.ericsson.tmus.simulators.gflex.message.client.MessageConsumerVerticle'
+def watchForChange = 'src/**/*'
+def doOnChange = './gradlew classes'
+
+
+shadowJar {
+  classifier = 'fat'
+  manifest {
+      attributes "Main-Verticle": mainVerticleName
+  }
+  mergeServiceFiles {
+    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+  }
+}
+
+run {
+  args = ['run', mainVerticleName, "--redeploy=$watchForChange", "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange"]
+}
+
