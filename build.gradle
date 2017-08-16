@@ -1,0 +1,41 @@
+plugins {
+    id "application"
+    id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+allprojects {
+    version = '1.0-SNAPSHOT'
+    sourceCompatibility = '1.8'
+    repositories {
+        jcenter()
+    }
+    task wrapper(type: Wrapper) {
+        gradleVersion = '4.0'
+    }
+}
+def vertxVersion = '3.4.2'
+subprojects{
+    apply plugin: 'application'
+    apply plugin: 'com.github.johnrengelman.shadow'
+    dependencies {
+        compile "io.vertx:vertx-core:$vertxVersion"
+        compile "io.vertx:vertx-rx-java:$vertxVersion"
+        compile "io.vertx:vertx-web:$vertxVersion"
+        testCompile "junit:junit:4.12"
+        testCompile "io.vertx:vertx-unit:$vertxVersion"
+    }
+}
+project(':gflex-simulator-consumer'){
+    dependencies{
+        compile "io.vertx:vertx-web-client:$vertxVersion"
+    }
+}
+project(':gflex-simulator-message'){
+    dependencies{
+        compile "io.vertx:vertx-infinispan:$vertxVersion"
+    }
+}
+project(':gflex-simulator-message-consumer'){
+    dependencies{
+        compile "io.vertx:vertx-infinispan:$vertxVersion"
+    }
+}

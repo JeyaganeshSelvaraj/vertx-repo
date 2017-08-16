@@ -1,0 +1,3 @@
+include 'gflex-simulator', 'gflex-simulator-consumer'
+include 'gflex-simulator-message', 'gflex-simulator-message-consumer'
+include 'hello-microservice-openshift'
